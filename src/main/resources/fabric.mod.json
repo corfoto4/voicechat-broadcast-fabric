@@ -21,7 +21,7 @@
     "main": [
       "net.corfoto4.voicechatbroadcastmod.VoicechatBroadcastMod"
     ],
-    "client": [
+    "voicechat": [
       "net.corfoto4.voicechatbroadcastmod.VoicechatBroadcastModClient"
     ]
   },
@@ -33,7 +33,8 @@
     "fabricloader": ">=0.14.19",
     "fabric-api": "*",
     "minecraft": "~1.19.4",
-    "java": ">=17"
+    "java": ">=17",
+    "voicechat": ">=${minecraft_version}-${voicechat_api_version}"
   },
   "suggests": {
     "another-mod": "*"
