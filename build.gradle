@@ -7,6 +7,8 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
+	mavenLocal()
+	mavenCentral()
 	maven {
 		name = "Modrinth"
 		url = "https://api.modrinth.com/maven"
@@ -16,6 +18,7 @@ repositories {
 	}
 
 	maven { url = 'https://maven.maxhenkel.de/repository/public' }
+	maven { url = 'https://maven.fabric.net/'}
 }
 
 dependencies {
@@ -29,6 +32,8 @@ dependencies {
 
 	implementation "de.maxhenkel.voicechat:voicechat-api:${voicechat_api_version}"
 	modRuntimeOnly "maven.modrinth:simple-voice-chat:fabric-${voicechat_version}"
+
+
 
 	// Uncomment the following line to enable the deprecated Fabric API modules. 
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.

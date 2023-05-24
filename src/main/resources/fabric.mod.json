@@ -22,7 +22,7 @@
       "net.corfoto4.voicechatbroadcastmod.VoicechatBroadcastMod"
     ],
     "voicechat": [
-      "net.corfoto4.voicechatbroadcastmod.VoicechatBroadcastModClient"
+      "net.corfoto4.voicechatbroadcastmod.VoicechatBroadcastPlugin"
     ]
   },
   "mixins": [
@@ -34,7 +34,7 @@
     "fabric-api": "*",
     "minecraft": "~1.19.4",
     "java": ">=17",
-    "voicechat": ">=${minecraft_version}-${voicechat_api_version}"
+    "voicechat": ">=1.19.4-2.3.3"
   },
   "suggests": {
     "another-mod": "*"
