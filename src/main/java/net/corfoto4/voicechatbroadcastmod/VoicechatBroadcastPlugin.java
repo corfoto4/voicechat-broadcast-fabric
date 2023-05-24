@@ -10,6 +10,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.PlayerManager;
 
+
 import java.util.List;
 
 public class VoicechatBroadcastPlugin implements VoicechatPlugin {
@@ -32,15 +33,14 @@ public class VoicechatBroadcastPlugin implements VoicechatPlugin {
     }
 
     private void onMicrophone(MicrophonePacketEvent event) {
+
         // The connection might be null if the event is caused by other means
         if (event.getSenderConnection() == null) {
             return;
         }
         // Cast the generic player object of the voice chat API to an actual bukkit player
         // This object should always be a bukkit player object on bukkit based servers
-        if (!(event.getSenderConnection().getPlayer().getPlayer() instanceof Player player)) {
-            return;
-        }
+
 
         Group group = event.getSenderConnection().getGroup();
 
@@ -48,6 +48,7 @@ public class VoicechatBroadcastPlugin implements VoicechatPlugin {
         if (group == null) {
             return;
         }
+
 
         // Only broadcast the voice when the group name is "broadcast"
         if (!group.getName().strip().equalsIgnoreCase("broadcast")) {
@@ -66,7 +67,7 @@ public class VoicechatBroadcastPlugin implements VoicechatPlugin {
 
         for (ServerPlayerEntity players : onlinePlayers)
         {
-            if (players.getUuid().equals((player.getUuid())))
+            if (players.getUuid().equals((event.getSenderConnection().getPlayer().getUuid())))
             {
                 continue;
             }
