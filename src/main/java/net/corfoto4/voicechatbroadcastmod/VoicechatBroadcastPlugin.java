@@ -4,6 +4,14 @@ import de.maxhenkel.voicechat.api.*;
 import de.maxhenkel.voicechat.api.events.EventRegistration;
 import de.maxhenkel.voicechat.api.events.MicrophonePacketEvent;
 
+import de.maxhenkel.voicechat.api.packets.*;
+
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.PlayerManager;
+
+import java.util.List;
+
 public class VoicechatBroadcastPlugin implements VoicechatPlugin {
 
     public static VoicechatApi voicechatApi;
@@ -50,6 +58,38 @@ public class VoicechatBroadcastPlugin implements VoicechatPlugin {
         event.cancel();
 
         VoicechatServerApi api = event.getVoicechat();
+
+
+        MinecraftServer server = VoicechatBroadcastMod.minecraftServer;
+        PlayerManager playerManager = server.getPlayerManager();
+        List<ServerPlayerEntity> onlinePlayers = playerManager.getPlayerList();
+
+        for (ServerPlayerEntity players : onlinePlayers)
+        {
+            if (players.getUuid().equals((player.getUuid())))
+            {
+                continue;
+            }
+
+            VoicechatConnection connection = api.getConnectionOf(players.getUuid());
+
+            if (connection == null)
+            {
+                continue;
+            }
+            StaticSoundPacket convertedPacket;
+            convertedPacket = createStaticSoundPacket(event.getPacket());
+            api.sendStaticSoundPacketTo(connection, convertedPacket);
+        }
+    }
+
+    public StaticSoundPacket createStaticSoundPacket(MicrophonePacket micPacket) {
+        StaticSoundPacket soundPacket;
+        soundPacket = micPacket.toStaticSoundPacket();
+
+        return soundPacket;
+
+        // Use the created static sound packet as needed
     }
 
 }
