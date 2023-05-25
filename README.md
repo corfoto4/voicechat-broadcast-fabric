@@ -10,10 +10,20 @@ This fabric mod/plugin is based on [Max Henkel's Spigot Voice Chat Broadcast Plu
 - Talk in the group.
 - Your voice chould be broadcasted to everyone on the server using the voice chat mod.
 
+## Capabilities
+This plugin can be used with LuckPerms with the permission node: `voicechat.broadcast`.
+If the node is set to `true`, then it will allow the player to send a broadcast message. If set to `false`,
+then the player will be told:
+<span style="color:red">You Cannot Broadcast to This Server</span>.
+
 ## Compatibility
 
 This plugin is currently in a pre-release stage. It is currently only designed for Simple Voice Chat Version 1.19.4-2.2.28 or greater.
 
-The mod is designed to run on Minecraft Fabric 1.19.4 with the Fabric API.
-- Fabric Version: 0.14.19
+The mod is designed to run on Minecraft Fabric 1.19.4 with the following API versions:
+- Fabric Loader: 0.14.19
 - Fabric API Version: 0.82.0+1.19.4
+- Simple Voice Chat API Version: 2.3.3
+- LuckPerms API Version: 5.4
+
+If you wish to use the permissions capability, you must install [LuckPerms Fabric](https://luckperms.net/download).

@@ -24,7 +24,6 @@ repositories {
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	//mappings loom.officialMojangMappings()
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
@@ -33,6 +32,8 @@ dependencies {
 	implementation "de.maxhenkel.voicechat:voicechat-api:${voicechat_api_version}"
 
 	modRuntimeOnly "maven.modrinth:simple-voice-chat:fabric-${voicechat_version}"
+
+	compileOnly "net.luckperms:api:${luckperms_api_version}"
 }
 
 processResources {
@@ -43,7 +44,8 @@ processResources {
 						'minecraft_version': minecraft_version,
 						'loader_version': loader_version,
 						'fabric_version': fabric_version,
-						'voicechat_api_version': voicechat_api_version
+						'voicechat_api_version': voicechat_api_version,
+						'luckperms_api_version': luckperms_api_version
 			}
 }
 

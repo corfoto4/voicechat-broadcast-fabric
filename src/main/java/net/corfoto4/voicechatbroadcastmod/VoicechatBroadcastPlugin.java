@@ -1,14 +1,18 @@
 package net.corfoto4.voicechatbroadcastmod;
 
 import de.maxhenkel.voicechat.api.*;
+import de.maxhenkel.voicechat.api.packets.*;
 import de.maxhenkel.voicechat.api.events.EventRegistration;
 import de.maxhenkel.voicechat.api.events.MicrophonePacketEvent;
 
-import de.maxhenkel.voicechat.api.packets.*;
-
+import net.luckperms.api.LuckPermsProvider;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 
+import net.luckperms.api.LuckPerms;
+import net.luckperms.api.model.user.User;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 
 import java.util.List;
 
@@ -25,6 +29,10 @@ public class VoicechatBroadcastPlugin implements VoicechatPlugin {
     }
 
     private void onMicrophone(MicrophonePacketEvent event) {
+        // Get the minecraft server instance
+        MinecraftServer server = VoicechatBroadcastMod.minecraftServer;
+        // Get an instance of luckperms
+        LuckPerms luckperms = LuckPermsProvider.get();
 
         // Check if the event is from a sending player
         if (event.getSenderConnection() == null) {
@@ -44,14 +52,37 @@ public class VoicechatBroadcastPlugin implements VoicechatPlugin {
             return;
         }
 
+        // Get the current user sending the broadcast
+        User user = luckperms.getUserManager().getUser(event.getSenderConnection().getPlayer().getUuid());
+
+        // Check if the user collected exists
+        if (user == null)
+        {
+            return;
+        }
+
+        // Check if the user has the broadcast permission. If not, tell them and quit broadcast.
+        if (!(user.getCachedData().getPermissionData().checkPermission("voicechat.broadcast").asBoolean()))
+        {
+            // If not, send them an action bar message syaing that they do not have the permission
+            Text message = Text.of("You Cannot Broadcast to This Server");
+            Text formattedText = message.copy().formatted(Formatting.RED); // Format the text red
+
+            // Get the player
+            ServerPlayerEntity player = server.getPlayerManager().getPlayer(user.getUniqueId());
+
+            // If the player gotten is a player, send the message
+            if (!(player == null)) {
+                player.sendMessage(formattedText, true);
+            }
+            return;
+        }
+
         // Cancel the actual microphone packet event that people in that group or close by don't hear the broadcaster twice
         event.cancel();
 
         // Get events from the voice chat
         VoicechatServerApi api = event.getVoicechat();
-
-        // Get the minecraft server instance
-        MinecraftServer server = VoicechatBroadcastMod.minecraftServer;
 
         // Get a list of players online in the server
         List<ServerPlayerEntity> onlinePlayers = server.getPlayerManager().getPlayerList();
