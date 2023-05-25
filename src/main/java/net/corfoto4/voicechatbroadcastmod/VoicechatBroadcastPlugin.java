@@ -61,6 +61,10 @@ public class VoicechatBroadcastPlugin implements VoicechatPlugin {
             return;
         }
 
+        // Cancel the actual microphone packet event that people in that group or close by don't hear the broadcaster twice
+        // Event cancel come before permissions so that if someone doesn't have the permission, they won't be able to talk in the broadcast group
+        event.cancel();
+
         // Check if the user has the broadcast permission. If not, tell them and quit broadcast.
         if (!(user.getCachedData().getPermissionData().checkPermission("voicechat.broadcast").asBoolean()))
         {
@@ -77,9 +81,6 @@ public class VoicechatBroadcastPlugin implements VoicechatPlugin {
             }
             return;
         }
-
-        // Cancel the actual microphone packet event that people in that group or close by don't hear the broadcaster twice
-        event.cancel();
 
         // Get events from the voice chat
         VoicechatServerApi api = event.getVoicechat();
