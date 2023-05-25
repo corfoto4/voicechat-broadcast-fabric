@@ -15,16 +15,9 @@ import java.util.List;
 
 public class VoicechatBroadcastPlugin implements VoicechatPlugin {
 
-    public static VoicechatApi voicechatApi;
-
     @Override
     public String getPluginId() {
         return "voicechatbroadcastmod";
-    }
-
-    @Override
-    public void initialize(VoicechatApi api) {
-        voicechatApi = api;
     }
 
     @Override
@@ -34,14 +27,12 @@ public class VoicechatBroadcastPlugin implements VoicechatPlugin {
 
     private void onMicrophone(MicrophonePacketEvent event) {
 
-        // The connection might be null if the event is caused by other means
+        // Check if the event is from a sending player
         if (event.getSenderConnection() == null) {
             return;
         }
-        // Cast the generic player object of the voice chat API to an actual bukkit player
-        // This object should always be a bukkit player object on bukkit based servers
 
-
+        // Get the current group of the sending player
         Group group = event.getSenderConnection().getGroup();
 
         // Check if the player sending the audio is actually in a group
@@ -49,8 +40,7 @@ public class VoicechatBroadcastPlugin implements VoicechatPlugin {
             return;
         }
 
-
-        // Only broadcast the voice when the group name is "broadcast"
+        // Make sure that the player is in the Broadcast group
         if (!group.getName().strip().equalsIgnoreCase("broadcast")) {
             return;
         }
@@ -58,39 +48,51 @@ public class VoicechatBroadcastPlugin implements VoicechatPlugin {
         // Cancel the actual microphone packet event that people in that group or close by don't hear the broadcaster twice
         event.cancel();
 
+        // Get events from the voice chat
         VoicechatServerApi api = event.getVoicechat();
 
-
+        // Get the minecraft server instance
         MinecraftServer server = VoicechatBroadcastMod.minecraftServer;
-        PlayerManager playerManager = server.getPlayerManager();
-        List<ServerPlayerEntity> onlinePlayers = playerManager.getPlayerList();
 
+        // Get a list of players online in the server
+        List<ServerPlayerEntity> onlinePlayers = server.getPlayerManager().getPlayerList();
+
+        // Repeat for every player currently on the server
         for (ServerPlayerEntity players : onlinePlayers)
         {
+            // Cancel packet processing if it in relation to the broadcaster speaking
             if (players.getUuid().equals((event.getSenderConnection().getPlayer().getUuid())))
             {
                 continue;
             }
 
+            // Get the voicechat connection of the player
             VoicechatConnection connection = api.getConnectionOf(players.getUuid());
 
+            // Cancel the packet if there is no connection for the player
             if (connection == null)
             {
                 continue;
             }
+
+            // Create static sound packet
             StaticSoundPacket convertedPacket;
             convertedPacket = createStaticSoundPacket(event.getPacket());
+
+            // Send the static sound packet out to the connection
             api.sendStaticSoundPacketTo(connection, convertedPacket);
         }
     }
 
     public StaticSoundPacket createStaticSoundPacket(MicrophonePacket micPacket) {
+        // Convert sound packet to static sound packet
+
         StaticSoundPacket soundPacket;
+
+        // Build the static sound packet from micophone packet
         soundPacket = micPacket.toStaticSoundPacket();
 
         return soundPacket;
-
-        // Use the created static sound packet as needed
     }
 
 }

@@ -14,8 +14,10 @@ public class VoicechatBroadcastMod implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		// Get the minecraft server instance
 		ServerLifecycleEvents.SERVER_STARTED.register(server -> VoicechatBroadcastMod.minecraftServer = server);
 
+		// Provide log to say the mod is initialized
 		LOGGER.info("Broadcast Mod Initialized");
 	}
 }

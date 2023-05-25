@@ -30,11 +30,11 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.14.19",
+    "fabricloader": ">=${loader_version}",
     "fabric-api": "*",
-    "minecraft": "~1.19.4",
+    "minecraft": "${minecraft_dependency}",
     "java": ">=17",
-    "voicechat": ">=1.19.4-2.3.3"
+    "voicechat": ">=${minecraft_version}-${voicechat_api_version}"
   },
   "suggests": {
     "another-mod": "*"
