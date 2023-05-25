@@ -8,7 +8,6 @@ import de.maxhenkel.voicechat.api.packets.*;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.PlayerManager;
 
 
 import java.util.List;
