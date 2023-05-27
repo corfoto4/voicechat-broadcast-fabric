@@ -3,7 +3,7 @@
   "id": "voicechatbroadcastmod",
   "version": "${version}",
 
-  "name": "Voicechat Broadcast Mod",
+  "name": "Voicechat Broadcast Mod - Fabric",
   "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
     "corfoto4"

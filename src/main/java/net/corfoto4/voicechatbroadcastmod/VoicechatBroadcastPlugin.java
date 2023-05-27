@@ -29,11 +29,6 @@ public class VoicechatBroadcastPlugin implements VoicechatPlugin {
     }
 
     private void onMicrophone(MicrophonePacketEvent event) {
-        // Get the minecraft server instance
-        MinecraftServer server = VoicechatBroadcastMod.minecraftServer;
-        // Get an instance of luckperms
-        LuckPerms luckperms = LuckPermsProvider.get();
-
         // Check if the event is from a sending player
         if (event.getSenderConnection() == null) {
             return;
@@ -52,6 +47,11 @@ public class VoicechatBroadcastPlugin implements VoicechatPlugin {
             return;
         }
 
+        // Get the minecraft server instance
+        MinecraftServer server = VoicechatBroadcastMod.minecraftServer;
+        // Get an instance of LuckPerms
+        LuckPerms luckperms = LuckPermsProvider.get();
+
         // Get the current user sending the broadcast
         User user = luckperms.getUserManager().getUser(event.getSenderConnection().getPlayer().getUuid());
 
@@ -65,21 +65,32 @@ public class VoicechatBroadcastPlugin implements VoicechatPlugin {
         // Event cancel come before permissions so that if someone doesn't have the permission, they won't be able to talk in the broadcast group
         event.cancel();
 
+        // Get UUID of player talking
+        ServerPlayerEntity player = server.getPlayerManager().getPlayer(user.getUniqueId());
+
         // Check if the user has the broadcast permission. If not, tell them and quit broadcast.
         if (!(user.getCachedData().getPermissionData().checkPermission("voicechat.broadcast").asBoolean()))
         {
-            // If not, send them an action bar message syaing that they do not have the permission
+            // If not, send them an action bar message saying that they do not have the permission
             Text message = Text.of("You Cannot Broadcast to This Server");
             Text formattedText = message.copy().formatted(Formatting.RED); // Format the text red
 
-            // Get the player
-            ServerPlayerEntity player = server.getPlayerManager().getPlayer(user.getUniqueId());
-
-            // If the player gotten is a player, send the message
+            // If the player is a player, send the message
             if (!(player == null)) {
                 player.sendMessage(formattedText, true);
             }
+
+
             return;
+        }
+
+        // Send action bar notification saying that the player is broadcasting
+        Text message = Text.of("You are Broadcasting to the Server!");
+        Text formattedText = message.copy().formatted(Formatting.WHITE); // Format the text white
+
+        // If the player is a player, send the message
+        if (!(player == null)) {
+            player.sendMessage(formattedText, true);
         }
 
         // Get events from the voice chat
@@ -120,8 +131,8 @@ public class VoicechatBroadcastPlugin implements VoicechatPlugin {
 
         StaticSoundPacket soundPacket;
 
-        // Build the static sound packet from micophone packet
-        soundPacket = micPacket.toStaticSoundPacket();
+        // Build the static sound packet from microphone packet
+        soundPacket = micPacket.staticSoundPacketBuilder().build();
 
         return soundPacket;
     }
