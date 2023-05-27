@@ -13,8 +13,7 @@ This fabric mod/plugin is based on [Max Henkel's Spigot Voice Chat Broadcast Plu
 ## Capabilities
 This plugin can be used with LuckPerms with the permission node: `voicechat.broadcast`.
 If the node is set to `true`, then it will allow the player to send a broadcast message. If set to `false`,
-then the player will be told:
-<span style="color:red">You Cannot Broadcast to This Server</span>.
+then the player cannot broadcast (default `false`).
 
 ## Compatibility
 
