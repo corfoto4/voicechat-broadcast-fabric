@@ -11,7 +11,7 @@ This mod is currently in a beta stage with slow updates.
 - Have a Fabric server running [Simple Voice Chat](https://modrinth.com/plugin/simple-voice-chat).
 - Create and join a group called `broadcast` (Case Insensitive).
 - Talk in the group.
-- Your voice chould be broadcasted to everyone on the server using the voice chat mod.
+- Your voice will be broadcasted to everyone on the server using the voice chat mod.
 
 ## Capabilities
 
@@ -29,7 +29,7 @@ If you wish to use the permissions capability, you must install [LuckPerms Fabri
 
 - Simple Voice Chat Version: 1.20.6-2.5.16 or greater.
 
-### 1.19.4:
+### 1.19.4 (beta):
 
 - Simple Voice Chat Version: 1.19.4-2.3.28 or greater.
 
