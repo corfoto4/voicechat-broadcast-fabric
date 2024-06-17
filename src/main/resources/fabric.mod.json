@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Voicechat Broadcast Mod - Fabric",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "description": "Fabric implementation of Henkelmax's broadcast addon for Simple Voice Chat",
   "authors": [
     "corfoto4"
   ],
@@ -13,8 +13,8 @@
     "sources": "https://github.com/FabricMC/fabric-example-mod"
   },
 
-  "license": "MIT License",
-  "icon": "assets/modid/icon.png",
+  "license": "MIT",
+  "icon": "icon.png",
 
   "environment": "*",
   "entrypoints": {
@@ -32,7 +32,7 @@
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric-api": "*",
-    "minecraft": "${minecraft_dependency}",
+    "minecraft": ">=${minecraft_dependency}",
     "java": ">=17",
     "voicechat": ">=${minecraft_version}-${voicechat_api_version}"
   },
