@@ -1,17 +1,18 @@
 # Voice Chat Broadcast Plugin - Fabric
 
-This fabric mod/plugin implementation is based on [henkelmax's Bukkit Voice Chat Broadcast Plugin](https://github.com/henkelmax/voicechat-broadcast-plugin).
+This fabric mod/plugin is based on [henkelmax's Bukkit Voice Chat Broadcast Plugin](https://github.com/henkelmax/voicechat-broadcast-plugin).
 
-This mod is currently in a beta stage with slow updates.
+This mod has slow updates.
 
 <hr>
 
 ## Usage
 
-- Have a Fabric server running [Simple Voice Chat](https://modrinth.com/plugin/simple-voice-chat).
+- Have a Fabric server running [Simple Voice Chat](https://modrinth.com/plugin/simple-voice-chat) and Fabric API.
 - Create and join a group called `broadcast` (Case Insensitive).
+- (Optional) If using luckperms, ensure permission node `voicechat.broadcast` is set to `true`.
 - Talk in the group.
-- Your voice will be broadcasted to everyone on the server using the voice chat mod.
+- Your voice will be broadcasted to everyone on the server using the voicechat mod.
 
 ## Capabilities
 
@@ -25,13 +26,7 @@ If you wish to use the permissions capability, you must install [LuckPerms Fabri
 
 ## Dependencies
 
-### 1.20.6:
-
-- Simple Voice Chat Version: 1.20.6-2.5.16 or greater.
-
-### 1.19.4 (beta):
-
-- Simple Voice Chat Version: 1.19.4-2.3.28 or greater.
-
+- Fabric API
+- Simple Voice Chat version: `1.x.x-2.5.x` (e.g. `1.20.6-2.5.12`)
 
 
