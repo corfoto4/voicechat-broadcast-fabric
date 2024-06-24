@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "voicechatbroadcast",
-  "version": "${version}",
+  "version": "${version}-${minecraft_version}",
 
   "name": "Voicechat Broadcast - Fabric",
   "description": "Fabric implementation of Henkelmax's broadcast addon for Simple Voice Chat",
