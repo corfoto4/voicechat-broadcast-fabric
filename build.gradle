@@ -6,8 +6,6 @@ plugins {
 group = project.maven_group
 
 repositories {
-	mavenLocal()
-	mavenCentral()
 	maven { url = 'https://maven.fabric.net/' }
 	maven { url = 'https://maven.maxhenkel.de/repository/public' }
 	maven {
@@ -32,7 +30,6 @@ dependencies {
 processResources {
 	filesMatching('fabric.mod.json') {
 		expand(
-				'minecraft_dependency': project.properties['minecraft_dependency'],
 				'minecraft_version': project.properties['minecraft_version'],
 				'loader_version': project.properties['loader_version'],
 				'fabric_version': project.properties['fabric_version'],
