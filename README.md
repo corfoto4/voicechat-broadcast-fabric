@@ -1,10 +1,15 @@
 # Voice Chat Broadcast Plugin - Fabric
 
+<div>
+  <a href="https://modrinth.com/mod/fabric-voice-chat-broadcast"><img src="https://img.shields.io/badge/dynamic/json?color=158000&label=Downloads&prefix=+%20&query=downloads&url=https://api.modrinth.com/v2/project/KWmrTkcC&logo=modrinth"></a>
+  <a href="https://curseforge.com/minecraft/mc-mods/fabric-voice-chat-broadcast"><img src="https://cf.way2muchnoise.eu/full_1048270_downloads.svg"></a>
+</div>
+
+<br/>
+
 This fabric mod/plugin is based on [henkelmax's Bukkit Voice Chat Broadcast Plugin](https://github.com/henkelmax/voicechat-broadcast-plugin).
 
 This mod has slow updates.
-
-<hr>
 
 ## Usage
 
